@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 import os
 
 # crawling
-pip install pandas
 import pandas as pd
 from datetime import datetime
 import requests
