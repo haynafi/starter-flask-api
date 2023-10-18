@@ -32,10 +32,11 @@ def alfa():
     # into getdata function
     htmldata = getdata(url)
     soup = BeautifulSoup(htmldata, 'html.parser')
-
+    
+    list_promo = soup.findAll('div', attrs={'id':'program-list'})
     # display html code
     # print(soup)
-    return soup
+    return list_promo
 
 # driver function 
 if __name__ == '__main__': 
