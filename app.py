@@ -46,7 +46,6 @@ def alfa():
     for datanya in list_promo:
         getClass = datanya.findAll('div', attrs={'class':'col-6 col-md-6 col-lg-3 filter-element'})
         for x in getClass:
-        date_now = datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
         url_promo_detail = x.find('a', attrs={'class':'card card-promo-item animated vp-fadeinup delayp1'}).get('href')
         nama_promo = x.find('h5', attrs={'class':'text-truncate-multiline'}).get_text()
         expiry_date = x.find('span').get_text()
@@ -55,7 +54,7 @@ def alfa():
         # img_url = x.find('div', attrs={'class':'img-wrapper'})
         # img_title = x.find('div', attrs={'class':'img-wrapper'})
         link_gambar = get_det_img['src']
-        arr_json.append('{ "name":'+nama_promo+', "exp_date":'+expiry_date+', "detail_promo":'+url_promo_detail+', "url_img":'+link_gambar+', "inserted_at":'+date_now+'}')
+        arr_json.append('{ "name":'+nama_promo+', "exp_date":'+expiry_date+', "detail_promo":'+url_promo_detail+', "url_img":'+link_gambar+'}')
 
     s1 = json.dumps(arr_json)
     d2 = json.loads(s1)
