@@ -23,20 +23,20 @@ def getdata(url):
 	r = requests.get(url)
 	return r.text
 
-@app.route('/alfa')
-def alfa():
-    # url
-    url = "https://alfamart.co.id/promo/hot-promo"
+# @app.route('/alfa')
+# def alfa():
+#     # url
+#     url = "https://alfamart.co.id/promo/hot-promo"
 
-    # pass the url
-    # into getdata function
-    htmldata = getdata(url)
-    soup = BeautifulSoup(htmldata, 'html.parser')
+#     # pass the url
+#     # into getdata function
+#     htmldata = getdata(url)
+#     soup = BeautifulSoup(htmldata, 'html.parser')
     
-    list_promo = soup.findAll('div', attrs={'id':'program-list'})
-    # display html code
-    # print(soup)
-    return list_promo
+#     list_promo = soup.findAll('div', attrs={'id':'program-list'})
+#     # display html code
+#     # print(soup)
+#     return list_promo
 
 # driver function 
 if __name__ == '__main__': 
