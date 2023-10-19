@@ -9,6 +9,8 @@ from bs4 import BeautifulSoup
 
 #for output json
 import json
+import jsonpickle
+
 
 app = Flask(__name__)
 
@@ -60,7 +62,7 @@ def alfa():
     s1 = json.dumps(arr_json)
     d2 = json.loads(s1)
     # print(d2)
-    return d2
+    return jsonpickle.encode(d2)
 
 # driver function 
 if __name__ == '__main__': 
