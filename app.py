@@ -26,12 +26,12 @@ def getdata(url):
 @app.route('/alfa')
 def alfa():
 #     # url
-#     url = "https://alfamart.co.id/promo/hot-promo"
+    url = "https://alfamart.co.id/promo/hot-promo"
 
 #     # pass the url
 #     # into getdata function
-#     htmldata = getdata(url)
-#     soup = BeautifulSoup(htmldata, 'html.parser')
+    htmldata = getdata(url)
+    soup = BeautifulSoup(htmldata, 'html.parser')
     
 #     list_promo = soup.findAll('div', attrs={'id':'program-list'})
 #     # display html code
