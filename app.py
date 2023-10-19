@@ -23,8 +23,8 @@ def getdata(url):
 	r = requests.get(url)
 	return r.text
 
-# @app.route('/alfa')
-# def alfa():
+@app.route('/alfa')
+def alfa():
 #     # url
 #     url = "https://alfamart.co.id/promo/hot-promo"
 
@@ -36,7 +36,7 @@ def getdata(url):
 #     list_promo = soup.findAll('div', attrs={'id':'program-list'})
 #     # display html code
 #     # print(soup)
-#     return list_promo
+    return 'alfa'
 
 # driver function 
 if __name__ == '__main__': 
