@@ -104,9 +104,10 @@ def mcd():
             # print(exp_date)
             for y in det_img2:
                 get_det_img = x.find('img', attrs={'class':'img-fluid'})
+                gmbr = get_det_img['src']
                 # print(get_det_img['src'])
 
-            arr_json.append('{ "name":'+nama_promo+', "exp_date":'+exp_date+', "detail_promo":'+url_promo_detail+', "url_img":'+get_det_img+', "inserted_at":'+date_now+'}')
+            arr_json.append('{ "name":'+nama_promo+', "exp_date":'+exp_date+', "detail_promo":'+url_promo_detail+', "url_img":'+gmbr+', "inserted_at":'+date_now+'}')
 
     s1 = json.dumps(arr_json)
     d2 = json.loads(s1)
