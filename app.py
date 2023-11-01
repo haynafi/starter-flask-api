@@ -95,6 +95,7 @@ def mcd():
     for datanya in list_promo:
         det_img = datanya.findAll('div', attrs={'class':'col-md-6 col-lg-4 filter-element'})
         for x in det_img:
+            date_now = datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
             det_img2 = x.findAll('div', attrs={'class':'img-container'})
             card_body = x.find('div', attrs={'class':'card-body'})
             nama_promo = x.find('h5').get_text()
