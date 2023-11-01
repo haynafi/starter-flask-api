@@ -115,6 +115,99 @@ def mcd():
     # print(d2)
     return jsonpickle.encode(d2)
 
+def db_insert(insert_val):
+    import psycopg2
+
+    #establishing the connection
+    conn = psycopg2.connect(
+    database="postgres", user='postgres', password='QkH8YLdkuXOwxSFA', host='db.fztsfukhwcsjecygkwjg.supabase.co', port= '5432'
+    )
+
+    #Setting auto commit false
+    conn.autocommit = True
+    
+    #Creating a cursor object using the cursor() method
+    cursor = conn.cursor()
+
+    # list of rows to be inserted
+    # values = insert_val
+    
+    # executing the sql statement
+    cursor.executemany("INSERT INTO public.alfa VALUES(%s,%s,%s,%s)", insert_val)
+    
+    # # select statement to display output
+    # sql1 = '''select * from classroom;'''
+    
+    # # executing sql statement
+    # cursor.execute(sql1)
+    
+    # fetching rows
+    for i in cursor.fetchall():
+        print(i)
+    
+    # committing changes
+    conn.commit()
+    
+    # closing connection
+    conn.close()
+    return 'insert'
+
+@app.route('/insert_alfa')
+def insert_alfa():
+    import psycopg2
+
+    #establishing the connection
+    conn = psycopg2.connect(
+    database="postgres", user='postgres', password='QkH8YLdkuXOwxSFA', host='db.fztsfukhwcsjecygkwjg.supabase.co', port= '5432'
+    )
+
+    #Setting auto commit false
+    conn.autocommit = True
+    
+    #Creating a cursor object using the cursor() method
+    cursor = conn.cursor()
+
+#     # url
+    url = "https://alfamart.co.id/promo/hot-promo"
+
+#     # pass the url
+#     # into getdata function
+    htmldata = getdata(url)
+    soup = BeautifulSoup(htmldata, 'html.parser')
+
+    #extract element
+    list_promo = soup.findAll('div', attrs={'id':'program-list'})
+    # print(list_promo)
+
+
+    arr_json = []
+
+    for datanya in list_promo:
+        getClass = datanya.findAll('div', attrs={'class':'col-6 col-md-6 col-lg-3 filter-element'})
+        for x in getClass:
+            date_now = datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
+            url_promo_detail = x.find('a', attrs={'class':'card card-promo-item animated vp-fadeinup delayp1'}).get('href')
+            nama_promo = x.find('h5', attrs={'class':'text-truncate-multiline'}).get_text()
+            expiry_date = x.find('span').get_text()
+            det_img = x.find('div', attrs={'class':'img-wrapper'})
+            get_det_img = det_img.find('img', alt=True)
+            # img_url = x.find('div', attrs={'class':'img-wrapper'})
+            # img_title = x.find('div', attrs={'class':'img-wrapper'})
+            link_gambar = get_det_img['src']
+            # arr_json.append('("'+nama_promo+'", "'+expiry_date+'", "'+url_promo_detail+'", "'+link_gambar+'")')
+            # Preparing SQL queries to INSERT a record into the database.
+            # cursor.execute('''INSERT INTO public.alfa ("name", exp_date, detail_promo, url_img) VALUES ("'''+nama_promo+'''", "'''+expiry_date+'''", "'''+url_promo_detail+'''", "'''+link_gambar+'''");''')
+            cursor.execute("INSERT INTO public.alfa (name, exp_date, detail_promo, url_img) VALUES ('"+nama_promo+"', '"+expiry_date+"', '"+url_promo_detail+"', '"+link_gambar+"')")
+    
+    # cursor.executemany("INSERT INTO public.alfa (name, exp_date, detail_promo, url_img) VALUES(%s,%s,%s,%s)", arr_json)
+    
+    conn.commit()
+
+    # Closing the connection
+    conn.close()
+    return 'ok'
+    
+
 # driver function 
 if __name__ == '__main__': 
   
